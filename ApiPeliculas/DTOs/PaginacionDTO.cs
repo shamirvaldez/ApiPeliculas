@@ -17,7 +17,7 @@ namespace ApiPeliculas.DTOs
             get => cantidadRegistroPorPagina;
             set
             {
-                CantidadRegistroPorPagina = (value > cantidadMaximaRegistroPorPagina) ? cantidadMaximaRegistroPorPagina : value;
+                cantidadRegistroPorPagina = (value > cantidadMaximaRegistroPorPagina) ? cantidadMaximaRegistroPorPagina : value;
             }
         }
     }
