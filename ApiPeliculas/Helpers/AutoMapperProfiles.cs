@@ -14,6 +14,10 @@ namespace ApiPeliculas.Helpers
         {
             CreateMap<Genero, GenerosDTO>().ReverseMap();
             CreateMap<GeneroCreacionDTO, Genero>();
+
+            CreateMap<SalasDeCine, SalaDeCineDTO>().ReverseMap();
+            CreateMap<SalaDeCineCreacionDTO,SalasDeCine>();
+
             CreateMap<Actor, ActorDTO>().ReverseMap();
             CreateMap<CreacionActorDTO, Actor>().ForMember(x => x.Foto, options => options.Ignore());
             CreateMap<ActorPatchDTO, Actor>().ReverseMap();

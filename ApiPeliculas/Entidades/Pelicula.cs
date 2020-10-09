@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiPeliculas.Entidades
 {
-    public class Pelicula
+    public class Pelicula : IID
     {
         public int Id {get; set;}
         [Required]
@@ -18,5 +18,6 @@ namespace ApiPeliculas.Entidades
         public List<PeliculasActores> peliculasActores { get; set; }
 
         public List<PeliculaGeneros> peliculaGeneros { get; set; }
+        public List<PeliculasSalasDeCine> PeliculasSalasDeCine { get; set; }
     }
 }

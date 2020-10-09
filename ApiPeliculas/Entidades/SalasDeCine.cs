@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace ApiPeliculas.Entidades
 {
-    public class Genero : IID
+    public class SalasDeCine : IID
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(40)]
-       public string Nombre { get; set; }
-       public List<PeliculaGeneros> PeliculasGeneros { get; set; }
+        [StringLength(120)]
+        public string Nombre { get; set; }
+
+        public List<PeliculasSalasDeCine> PeliculasSalasDeCines { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace ApiPeliculas.Controllers
 {
     [Route("api/peliculas")]
     [ApiController]
-    public class PeliculasController : ControllerBase
+    public class PeliculasController : CustomBaseController
     {
         private readonly ApplicationDbContext Context;
         private readonly IMapper Mapper;
@@ -29,6 +29,7 @@ namespace ApiPeliculas.Controllers
         private readonly ILogger<PeliculasController> Logger;
         public PeliculasController(ApplicationDbContext context, IMapper mapper,
             IAlmacenadorArchivos almacenadorArchivos , ILogger<PeliculasController> logger)
+            :base(context,mapper)
         {
             this.Context = context;
             this.Mapper = mapper;
@@ -198,51 +199,57 @@ namespace ApiPeliculas.Controllers
         [HttpPatch("{id}")]
         public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<PeliculaPatchDTO> patchDocument)
         {
-            if (patchDocument == null)
-            {
-                return BadRequest();
-            }
+            ///[FromBody] JsonPatchDocument<ActorPatchDTO> patchDocument
+            
+            return await Patch<Pelicula, PeliculaPatchDTO>(id, patchDocument);
 
-            var entidad = await Context.Peliculas.FirstOrDefaultAsync(x => x.Id == id);
+            //if (patchDocument == null)
+            //{
+            //    return BadRequest();
+            //}
 
-            if (entidad == null)
-            {
-                return NotFound();
-            }
+            //var entidad = await Context.Peliculas.FirstOrDefaultAsync(x => x.Id == id);
+
+            //if (entidad == null)
+            //{
+            //    return NotFound();
+            //}
 
 
-            var entidadDTO = Mapper.Map<PeliculaPatchDTO>(entidad);
+            //var entidadDTO = Mapper.Map<PeliculaPatchDTO>(entidad);
 
-            patchDocument.ApplyTo(entidadDTO, ModelState);
+            //patchDocument.ApplyTo(entidadDTO, ModelState);
 
-            var esValido = TryValidateModel(entidadDTO);
+            //var esValido = TryValidateModel(entidadDTO);
 
-            if (!esValido)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!esValido)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
-            Mapper.Map(entidadDTO, entidad);
+            //Mapper.Map(entidadDTO, entidad);
 
-            await Context.SaveChangesAsync();
+            //await Context.SaveChangesAsync();
 
-            return NoContent();
+            //return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await Context.Peliculas.AnyAsync(x => x.Id == id);
 
-            if (!existe)
-            {
-                return NotFound();
-            }
+            return await Delete<Pelicula>(id);
+            //var existe = await Context.Peliculas.AnyAsync(x => x.Id == id);
 
-            Context.Remove(new Pelicula() { Id = id });
-            await Context.SaveChangesAsync();
+            //if (!existe)
+            //{
+            //    return NotFound();
+            //}
 
-            return NoContent();
+            //Context.Remove(new Pelicula() { Id = id });
+            //await Context.SaveChangesAsync();
+
+            //return NoContent();
         }
     }
 }

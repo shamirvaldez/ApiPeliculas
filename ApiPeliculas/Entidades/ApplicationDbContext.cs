@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace ApiPeliculas.Entidades
@@ -20,6 +21,9 @@ namespace ApiPeliculas.Entidades
 
             modelBuilder.Entity<PeliculaGeneros>()
             .HasKey(x => new { x.GeneroId, x.PeliculaId });
+
+            modelBuilder.Entity<PeliculasSalasDeCine>()
+            .HasKey(x => new { x.PeliculaId , x.SalaDeCineId });
 
             SeedData(modelBuilder);
 
@@ -174,6 +178,8 @@ namespace ApiPeliculas.Entidades
         public DbSet<Pelicula> Peliculas { get; set; }
         public DbSet<PeliculasActores> PeliculaActores { get; set; }
         public DbSet<PeliculaGeneros> PeliculaGeneros { get; set; }
+        public DbSet<PeliculasSalasDeCine> PeliculasSalasDeCines { get; set;}
+        public DbSet<SalasDeCine> SalasDeCines { get; set; }
         
     }
 }
